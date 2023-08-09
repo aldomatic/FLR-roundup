@@ -21,9 +21,9 @@ jobs:
       with:
         fetch-depth: 0
         path : 'tmp-directory'
-        sparse-checkout: |
-          roundup
-        
+        # sparse-checkout: |
+        #   roundup
+       
     - name: Get changed files
       id: changed-files
       uses: tj-actions/changed-files@v37
