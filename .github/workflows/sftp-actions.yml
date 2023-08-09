@@ -34,7 +34,10 @@ jobs:
         echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
         ssh-keyscan -H ssh.getflywheel.com > ~/.ssh/known_hosts
     - name: connect and pull
-      run: ssh ${{ secrets.SSH_USER }}@ssh.getflywheel.com "ls && exit"
+      #run: ssh ${{ secrets.SSH_USER }}@ssh.getflywheel.com "ls && exit"
+      run: ssh -o "IdentitiesOnly=yes" -i ~/.ssh/id_rsa anovadigital+freelegalreviews@ssh.getflywheel.com "ls && exit"
       #run: ssh ${{ secrets.SSH_USER }}@ssh.getflywheel.com "cd ${{ secrets.WORK_DIR }} && git checkout ${{ secrets.MAIN_BRANCH }} && git pull && exit"
     - name: cleanup
       run: rm -rf ~/.ssh
+
+      
