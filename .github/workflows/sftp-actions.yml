@@ -16,7 +16,7 @@ jobs:
         sparse-checkout: |
           lp
     - name: list temp directory
-      run: cd /home/runner/work/FLR-roundup/FLR-roundup/tmp-directory && ls
+      run: cd /home/runner/work/FLR-roundup/FLR-roundup/tmp-directory/lp && ls
 
   run_pull:
     name: run pull
