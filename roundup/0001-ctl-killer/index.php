@@ -264,7 +264,9 @@
     </div>
 
     </main>
-      <footer class="pt-5 my-5 text-body-secondary border-top">© <?php echo date("Y"); ?> Free Legal Reviews</footer>
+      <footer class="pt-5 my-5 text-body-secondary border-top">
+        © <?php echo date("Y"); ?> Free Legal Reviews
+      </footer>
     </div>
   </div>
 
@@ -275,6 +277,6 @@
     <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
     <script src="js/phoneFormatter.js"></script>
     <script src="js/ui-control.js"></script>
-    
+
   </body>
 </html>
