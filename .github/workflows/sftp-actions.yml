@@ -1,0 +1,24 @@
+on:
+  # run it on push to the default repository branch
+  push:
+    branches: [main]
+  # run it during pull request
+  pull_request:
+
+jobs:
+  deploy_job:
+    name: Build and Publish To FreeLegalReviews.com (Roundup)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Deploy file
+        uses: wlixcc/SFTP-Deploy-Action@v1.2.4
+        with:
+            username: ${{ secrets.FTP_USERNAME }}
+            server: ${{ secrets.FTP_SERVER }}
+            port: ${{ secrets.FTP_PORT }}
+            local_path: './lp/*'
+            remote_path: '/anovadigital'
+            sftp_only: true
+            password: ${{ secrets.FTP_PASSWORD }}
