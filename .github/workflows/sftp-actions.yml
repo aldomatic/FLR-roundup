@@ -6,19 +6,16 @@ on:
   pull_request:
 
 jobs:
-  deploy_job:
-    name: Build and Publish To FreeLegalReviews.com (Roundup)
+  deploy_sftp_job:
+    name: Flywheel SSH Deploy
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Deploy file
-        uses: wlixcc/SFTP-Deploy-Action@v1.2.4
-        with:
-            username: ${{ secrets.FTP_USERNAME }}
-            server: ${{ secrets.FTP_SERVER }}
-            port: ${{ secrets.FTP_PORT }}
-            local_path: './lp/*'
-            remote_path: '/anovadigital'
-            sftp_only: true
-            password: ${{ secrets.FTP_PASSWORD }}
+    - uses: actions/checkout@v2
+    - name: Deploy to Server
+      uses: easingthemes/ssh-deploy@v2.1.5
+      env:
+        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        REMOTE_HOST: ssh.getflywheel.com
+        REMOTE_USER: ${{ secrets.SSH_USER }}
+        ARGS: -rltgoDzvO --exclude .git --exclude .github
+        TARGET: /anovadigital/freelegalreviews/roundup
