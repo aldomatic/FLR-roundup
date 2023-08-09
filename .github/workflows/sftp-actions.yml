@@ -7,31 +7,46 @@ on:
 
 jobs:
   deploy_sftp_job:
-    name: Flywheel SSH Deploy
+    name: Copy files to flywheel
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
-      with:
-        path : 'tmp-directory'
-        sparse-checkout: |
-          lp
-    - name: list temp directory
-      run: cd /home/runner/work/FLR-roundup/FLR-roundup/tmp-directory/lp && ls
+    - name: Deploy to Server
+      uses: easingthemes/ssh-deploy@v3.0.1
+      env:
+        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        REMOTE_HOST: ssh.getflywheel.com
+        REMOTE_USER: ${{ secrets.SSH_USER }}
+        ARGS: -rltgoDzvO --exclude .git --exclude .github
+        REMOTE_PORT: '22 -o PubkeyAcceptedKeyTypes=+ssh-rsa'
+        TARGET: /www/github-cicd
 
-  run_pull:
-    name: run pull
-    runs-on: ubuntu-latest
-    steps:
-    - name: install ssh keys
-      # check this thread to understand why its needed:
-      # https://stackoverflow.com/a/70447517
-      run: |
-        install -m 600 -D /dev/null ~/.ssh/id_rsa
-        echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
-        ssh-keyscan -H ssh.getflywheel.com > ~/.ssh/known_hosts
-    - name: connect and pull
-      #run: ssh ${{ secrets.SSH_USER }}@ssh.getflywheel.com "ls && exit"
-      run: ssh -o "IdentitiesOnly=yes" -i ~/.ssh/id_rsa ${{ secrets.SSH_USER }}@ssh.getflywheel.com "cd /www/roundup && ls && exit"
-      #run: ssh ${{ secrets.SSH_USER }}@ssh.getflywheel.com "cd ${{ secrets.WORK_DIR }} && git checkout ${{ secrets.MAIN_BRANCH }} && git pull && exit"
-    - name: cleanup
-      run: rm -rf ~/.ssh
+  # deploy_sftp_job:
+  #   name: Flywheel SSH Deploy
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #   - uses: actions/checkout@v3
+  #     with:
+  #       path : 'tmp-directory'
+  #       sparse-checkout: |
+  #         lp
+  #   - name: list temp directory
+  #     run: cd /home/runner/work/FLR-roundup/FLR-roundup/tmp-directory/lp && ls
+
+  # run_pull:
+  #   name: run pull
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #   - name: install ssh keys
+  #     # check this thread to understand why its needed:
+  #     # https://stackoverflow.com/a/70447517
+  #     run: |
+  #       install -m 600 -D /dev/null ~/.ssh/id_rsa
+  #       echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+  #       ssh-keyscan -H ssh.getflywheel.com > ~/.ssh/known_hosts
+  #   - name: connect and pull
+  #     #run: ssh ${{ secrets.SSH_USER }}@ssh.getflywheel.com "ls && exit"
+  #     run: ssh -o "IdentitiesOnly=yes" -i ~/.ssh/id_rsa ${{ secrets.SSH_USER }}@ssh.getflywheel.com "cd /www/roundup && ls && exit"
+  #     #run: ssh ${{ secrets.SSH_USER }}@ssh.getflywheel.com "cd ${{ secrets.WORK_DIR }} && git checkout ${{ secrets.MAIN_BRANCH }} && git pull && exit"
+  #   - name: cleanup
+  #     run: rm -rf ~/.ssh
