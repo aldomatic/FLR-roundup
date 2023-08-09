@@ -15,10 +15,12 @@ jobs:
         path : 'tmp-directory'
         sparse-checkout: |
           lp
+    - name: list temp directory
+      run: cd /home/runner/work/FLR-roundup/FLR-roundup/tmp-directory && ls
+
   run_pull:
     name: run pull
     runs-on: ubuntu-latest
-    
     steps:
     - name: install ssh keys
       # check this thread to understand why its needed:
