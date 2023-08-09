@@ -24,8 +24,6 @@ jobs:
           roundup
     - name: list temp directory
       run: cd /home/runner/work/FLR-roundup/FLR-roundup/tmp-directory && ls
-    - name: list temp directory v2
-      run: cd /home/runner/work/FLR-roundup/tmp-directory && ls
 
     - name: Get changed files
       id: changed-files
