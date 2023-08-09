@@ -26,7 +26,20 @@ jobs:
       run: cd /home/runner/work/FLR-roundup/FLR-roundup/tmp-directory && ls
     - name: list temp directory v2
       run: cd /home/runner/work/FLR-roundup/tmp-directory && ls
-    - name: copy files to remote server
-      run: rsync /home/runner/work/FLR-roundup/FLR-roundup/tmp-directory anovadigital+freelegalreviews@ssh.getflywheel.com:/www/github-cicd --rsh "ssh -p 22 -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no" --recursive -rltgoDzvO --exclude .git --exclude .github -P
+
+    - name: Get changed files
+      id: changed-files
+      uses: tj-actions/changed-files@v37
+
+    # NOTE: `since_last_remote_commit: true` is implied by default and falls back to the previous local commit.
+
+    - name: List all changed files
+      run: |
+        for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
+          echo "$file was changed"
+        done
+
+    #- name: copy files to remote server
+      #run: rsync /home/runner/work/FLR-roundup/FLR-roundup/tmp-directory anovadigital+freelegalreviews@ssh.getflywheel.com:/www/github-cicd --rsh "ssh -p 22 -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no" --recursive -rltgoDzvO --exclude .git --exclude .github -P
     - name: cleanup
       run: rm -rf ~/.ssh
