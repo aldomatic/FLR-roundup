@@ -12,10 +12,11 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Deploy to Server
-      uses: easingthemes/ssh-deploy@v2.1.5
+      uses: easingthemes/ssh-deploy@v3.0.1
       env:
         SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
         REMOTE_HOST: ssh.getflywheel.com
         REMOTE_USER: ${{ secrets.SSH_USER }}
         ARGS: -rltgoDzvO --exclude .git --exclude .github
+        REMOTE_PORT: '22 -o PubkeyAcceptedKeyTypes=+ssh-rsa'
         TARGET: /anovadigital/freelegalreviews/roundup
