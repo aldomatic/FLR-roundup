@@ -24,6 +24,6 @@ jobs:
     - name: list temp directory contents
       run: cd /home/runner/work/FLR-roundup/FLR-roundup && ls
     - name: copy files to remote server
-      run: rsync -anv /home/runner/work/FLR-roundup/FLR-roundup anovadigital+freelegalreviews@ssh.getflywheel.com:/www/github-cicd --rsh "ssh -p 22 -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no" --recursive -rltgoDzvO --exclude .git --exclude .github --exclude README.md
+      run: rsync -auv /home/runner/work/FLR-roundup/FLR-roundup anovadigital+freelegalreviews@ssh.getflywheel.com:/www/github-cicd --rsh "ssh -p 22 -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no" --recursive -rltgoDzvO --exclude .git --exclude .github --exclude README.md
     - name: cleanup
       run: rm -rf ~/.ssh
