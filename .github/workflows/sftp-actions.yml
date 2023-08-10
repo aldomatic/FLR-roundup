@@ -57,8 +57,8 @@ jobs:
       - name: List all changed files
         run: |
           for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
-            $dir=$(echo $file | awk -F\/ '{print $2}')
-            echo "$dir"
+            folderDir=$(echo $file | awk -F\/ '{print $2}')
+            echo "$folderDir"
           done
       - name: cleanup
         run: rm -rf ~/.ssh
