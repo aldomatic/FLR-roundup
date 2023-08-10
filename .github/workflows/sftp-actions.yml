@@ -57,8 +57,7 @@ jobs:
       - name: List all changed files
         run: |
           for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
-            $folderToUpload = echo $file | awk -F\/ '{print $2}'
-            echo "$folderToUpload"
+            echo $file | awk -F\/ '{print $2}'
           done
       - name: cleanup
         run: rm -rf ~/.ssh
