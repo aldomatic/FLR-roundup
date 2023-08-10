@@ -1,16 +1,12 @@
 on:
-  # run it on push to the default repository branch
   push:
     branches: [main]
-  # run it during pull request
-  pull_request:
-
 jobs:
   deploy_sftp_job:
-    name: Flywheel SSH Deploy
+    name: Flywheel SFTP Deploy
     runs-on: ubuntu-latest
     steps:
-    - name: install ssh keys
+    - name: Install ssh keys
       # check this thread to understand why its needed:
       # https://stackoverflow.com/a/70447517
       run: |
@@ -22,9 +18,7 @@ jobs:
       #   path : 'temp-dir'
       #   sparse-checkout: |
       #     roundup
-    - name: list temp directory contents
-      run: cd /home/runner/work/FLR-roundup/FLR-roundup && ls
-    - name: copy files to remote server
+    - name: Copy files over to flywheel server for freelegalreviews.com
       run: rsync -rauvhP /home/runner/work/FLR-roundup/FLR-roundup/* anovadigital+freelegalreviews@ssh.getflywheel.com:/www/github-cicd --rsh "ssh -p 22 -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no" --recursive -rltgoDzvO --exclude .git --exclude .github --exclude README.md
-    - name: cleanup
+    - name: Clean up .ssh directory
       run: rm -rf ~/.ssh
