@@ -277,6 +277,5 @@
     <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
     <script src="js/phoneFormatter.js"></script>
     <script src="js/ui-control.js"></script>
-
   </body>
 </html>
