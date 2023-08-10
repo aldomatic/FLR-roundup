@@ -18,10 +18,10 @@ jobs:
         echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
         ssh-keyscan -H ssh.getflywheel.com > ~/.ssh/known_hosts
     - uses: actions/checkout@v3
-      with:
-        path : 'roundup'
-        sparse-checkout: |
-          roundup
+      # with:
+      #   path : 'roundup'
+      #   sparse-checkout: |
+      #     roundup
     - name: list temp directory contents
       run: cd /home/runner/work/FLR-roundup/FLR-roundup && ls
     - name: copy files to remote server
