@@ -58,7 +58,7 @@ jobs:
         run: |
           for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
             echo $file | awk -F\/ '{print $2}'
-            $dir = $file | awk -F\/ '{print $2}'
+            $dir=`$file | awk -F\/ '{print $2}'`
             echo $dir
             rsync /home/runner/work/FLR-roundup/FLR-roundup/tmp-directory/${echo $file | awk -F\/ '{print $2}'} anovadigital+freelegalreviews@ssh.getflywheel.com:/www/github-cicd/${echo $file | awk -F\/ '{print $2}'} --rsh "ssh -p 22 -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no" --recursive -rltgoDzvO --exclude .git --exclude .github -P
           done
