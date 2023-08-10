@@ -59,7 +59,7 @@ jobs:
           for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
             folderDir=$(echo $file | awk -F\/ '{print $2}')
             echo "$folderDir"
-            rsync /home/runner/work/FLR-roundup/FLR-roundup/tmp-directory/$folderDir anovadigital+freelegalreviews@ssh.getflywheel.com:/www/github-cicd/$folderDir --rsh "ssh -p 22 -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no" --recursive -rltgoDzvO --exclude .git --exclude .github -P
+            rsync "/home/runner/work/FLR-roundup/FLR-roundup/tmp-directory/$folderDir" "anovadigital+freelegalreviews@ssh.getflywheel.com:/www/github-cicd/$folderDir" --rsh "ssh -p 22 -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no" --recursive -rltgoDzvO --exclude .git --exclude .github -P
           done
       - name: cleanup
         run: rm -rf ~/.ssh
