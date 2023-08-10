@@ -264,9 +264,7 @@
     </div>
 
     </main>
-      <footer class="pt-5 my-5 text-body-secondary border-top">
-        © <?php echo date("Y"); ?> Free Legal Reviews
-      </footer>
+      <footer class="pt-5 my-5 text-body-secondary border-top">© <?php echo date("Y"); ?> Free Legal Reviews</footer>
     </div>
   </div>
 
