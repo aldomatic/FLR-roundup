@@ -5,7 +5,6 @@ on:
 jobs:
   deploy_sftp_job:
     name: Flywheel SFTP Deploy
-    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
     - name: Exit if not on main branch
