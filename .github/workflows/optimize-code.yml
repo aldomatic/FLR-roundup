@@ -10,7 +10,7 @@ jobs:
       - name: HTML/CSS/JS Minifier
         uses: docker://devatherock/minify-js:3.1.0
         with:
-          # directory: 'roundup'      # Optional
+          directory: 'roundup/'      # Optional
           output: 'minify'  # Optional
           add_suffix: false     # Optional
         #   inclusions: |-        # Optional
@@ -20,6 +20,8 @@ jobs:
 
       - name: Validate Minified
         run: |
-            echo ${{ github.workspace }}
+            cd ${{ github.workspace }}
+            pwd
+            ls
             
         
