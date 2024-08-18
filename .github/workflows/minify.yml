@@ -1,0 +1,20 @@
+name: Minify JS/CSS (roundup)
+on:
+  workflow_dispatch:
+  # push:
+  #   branches: [main]
+jobs:
+  build:
+    runs-on: ubuntu-latest      # Docker-based github actions have to run on a linux environment
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: minisauras
+        uses: TeamTigers/minisauras@v2.0.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+        id: dir
+        with:
+          directory: './' ## minify all files from root directory
+            
+        
