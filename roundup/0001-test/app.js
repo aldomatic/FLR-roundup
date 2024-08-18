@@ -1,3 +1,1 @@
-function runMe() {
-    console.log('Hello!')
-}
+function runMe(){console.log("Hello!")}
