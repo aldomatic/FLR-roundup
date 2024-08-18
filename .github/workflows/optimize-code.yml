@@ -20,7 +20,7 @@ jobs:
       - name: Pushing to production branch
         uses: actions-js/push@master
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.GH_TOKEN }}
           directory: github/workspace
           branch: production
           message: Minified css, js and html
