@@ -11,7 +11,7 @@ jobs:
          uses: emepetres/html-minifier-action@v1
          id: html-minifier
          with:
-           rootDir: "."
+           # rootDir: "."
            verbose: true
            flags: "collapseWhitespace, removeComments, removeOptionalTags, removeRedundantAttributes, removeScriptTypeAttributes, removeTagWhitespace, useShortDoctype, removeAttributeQuotes"
        - name: Get the minfied files from output
