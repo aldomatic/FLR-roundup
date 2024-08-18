@@ -20,6 +20,7 @@ jobs:
 
       - name: Validate Minified
         run: |
-            pwd
+            cd /home/runner/work/FLR-roundup/FLR-roundup
+            ls
             
         
