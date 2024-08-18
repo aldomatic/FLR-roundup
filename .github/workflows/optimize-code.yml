@@ -17,3 +17,7 @@ jobs:
             .*assets.*
           exclusions: |-        # Optional
             .*assets/.*
+
+      - name: Validate Minified
+        run: ls
+        
