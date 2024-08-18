@@ -7,14 +7,19 @@ jobs:
   build:
     runs-on: ubuntu-latest      # Docker-based github actions have to run on a linux environment
     steps:
-       - name: HTMLMinifier
-         uses: emepetres/html-minifier-action@v1
-         id: html-minifier
-         with:
-           # rootDir: "."
-           verbose: true
-           flags: "collapseWhitespace, removeComments, removeOptionalTags, removeRedundantAttributes, removeScriptTypeAttributes, removeTagWhitespace, useShortDoctype, removeAttributeQuotes"
-       - name: Get the minfied files from output
-         run: echo "The files minfied are ${{ steps.html-minifier.outputs.minifiedFiles }}"
+      - name: HTML/CSS/JS Minifier
+        uses: docker://devatherock/minify-js:3.1.0
+        with:
+          # directory: 'roundup'      # Optional
+          output: 'minify'  # Optional
+          add_suffix: false     # Optional
+        #   inclusions: |-        # Optional
+        #     .*assets.*
+        #   exclusions: |-        # Optional
+        #     .*assets/.*
+
+      - name: Validate Minified
+        run: |
+            echo ${{ github.workspace }}
             
         
