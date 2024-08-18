@@ -20,5 +20,6 @@ jobs:
 
       - name: Validate Minified
         run: |
-            ls
+            pwd
+            
         
