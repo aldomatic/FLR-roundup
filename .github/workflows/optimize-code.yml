@@ -6,17 +6,24 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest      # Docker-based github actions have to run on a linux environment
+    env:
+        prepo: ${{github.repository}}
     steps:
-      - name: HTML/CSS/JS Minifier
-        uses: docker://devatherock/minify-js:3.1.0
+      - uses: actions/checkout@v2
+      - name: Set up Minify Actions
+        uses: amireshoon/minifyAction@main
         with:
-          output: '/mini/'
-          add_suffix: false     # Optional
-
-      - name: Validate Minified
+          repo: $prepo
+      - name: Minifying Codes
         run: |
-            cd ${{ github.workspace }}
-            pwd
-            ls
-            
-        
+          minifier.sh $prepo
+      - name: Pushing to production branch
+        uses: actions-js/push@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          directory: github/workspace
+          branch: production
+          message: Minified css, js and html
+          author_name: MinifyAction[bot]
+          author_email: amireshoon-minifyAction@users.noreply.github.com
+          force: true
