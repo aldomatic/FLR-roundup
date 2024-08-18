@@ -19,5 +19,7 @@ jobs:
             .*assets/.*
 
       - name: Validate Minified
-        run: cd /home/runner/work/FLR-roundup/FLR-roundup && ls
+        run: |
+            cd /home/runner/work/FLR-roundup/FLR-roundup 
+            ls
         
