@@ -13,14 +13,14 @@ jobs:
           # directory: 'roundup'      # Optional
           output: 'minify/roundup'  # Optional
           add_suffix: false     # Optional
-          inclusions: |-        # Optional
-            .*assets.*
-          exclusions: |-        # Optional
-            .*assets/.*
+        #   inclusions: |-        # Optional
+        #     .*assets.*
+        #   exclusions: |-        # Optional
+        #     .*assets/.*
 
       - name: Validate Minified
         run: |
-            cd /home/runner/work/FLR-roundup/FLR-roundup/
-            pwd
+            cd /home/runner/work/FLR-roundup/FLR-roundup
+            ls
             
         
